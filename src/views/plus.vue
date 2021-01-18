@@ -1,15 +1,22 @@
 <template>
   <div class="plus" 
   :class="isMobile">
+  
+    
+      <countdownBar v-show='timeAttackMode' :width='countDown'/>
+    
+      <div class="score">
+        {{score}}  
+      </div>
     <div 
     ref="equation"
     class="question"
     :class="{chk:chk}">
-
+    
     {{x}} <span v-html='operation' ></span> {{y}}
     </div >
+  <operations @startTimeAttack='startTimeAttack' v-if="!timeAttackMode"/>
     <div :class="chk" class="ans"> {{ans|zero}}</div>
-  <operations/>
   </div>
 </template>
 
@@ -17,9 +24,14 @@
 // @ is an alias to /src
 
 import operations from '../components/operations'
+import countdownBar from '../components/countdownBar'
 import {mapState,mapActions} from 'vuex'
 export default {
+  created () {
+    
+  },
 components: {
+  countdownBar,
   operations
 },
 
@@ -28,9 +40,11 @@ computed: {
 },
 data () {
   return {
+    countDown:100,
+    score:'',
+    timeAttackMode:false,
     x:Math.floor(Math.random()*100),  
-    y:Math.floor(Math.random()*100),
-         
+    y:Math.floor(Math.random()*100), 
     chk:'',
 
   }
@@ -46,6 +60,26 @@ watch: {
 },
 methods: {
   ...mapActions(['clrAll']),
+  startTimeAttack(){
+    this.score=0;
+    this.countDown=100;
+    this.timeAttackMode=true
+    this.countDownTimer()
+  },
+  countDownTimer() {
+    if(this.countDown > 0) {
+        setTimeout(() => {
+            this.countDown -= 1
+            this.score++
+            this.countDownTimer()
+        }, 100)
+    }
+    else{
+      this.timeAttackMode=false
+    }
+    
+    console.log('end')
+  },
   generateXY(v){
     while(v=='&minus;' && this.x<this.y){
       this.x=Math.floor(Math.random()*20);  
@@ -80,7 +114,9 @@ methods: {
     
     if(condition[this.operation ]==this.ans)
       {
+        this.score+=20 
         this.chk='correct'
+        this.countDown+=30
         let that=this
         setTimeout(function(){ 
           that.clrAll()
@@ -107,8 +143,15 @@ filters: {
 }
 </script>
 <style scoped>
+ .score{
+   height:4vh;
+   font-size: 4vh;
+   font-weight: 600;
+   color: green;
+ }
 .plus{
   display: flex;
+  padding-top: 5px;
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: column;

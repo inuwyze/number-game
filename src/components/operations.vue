@@ -1,13 +1,19 @@
 <template>
   <div style="position:absolute;right:0">
-      <div
-      v-for="x in operations"
-      class="ops"
-      :class="{active:operation==x}"
-      :key="x"
-      @click="setOperation(x)">
-        <span v-html='x' ></span>
-      </div>
+        <div
+        class="ops"
+        @click="$emit('startTimeAttack')" 
+        >
+        <div class="timeAttackIcon"></div>
+        </div>
+        <div
+        v-for="x in operations"
+        class="ops"
+        :class="{active:operation==x}"
+        :key="x"
+        @click="setOperation(x)">
+            <span v-html='x' ></span>
+        </div>
 
   </div>
 </template>
@@ -30,9 +36,21 @@ export default {
 </script>
 
 <style>
+    .timeAttackIcon{
+            background: url("../assets/timeattack.jpg");
+            background-size:contain;
+            height: 32px;
+            width: 32px;
+            /* border:1px solid grey; */
+            display: block;   
+        }
  .ops{
      border: 1px solid rgb(218, 218, 218);
-     padding: 15px;
+     height: 45px;
+     width: 40px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
  }
  .active{
      background: rgb(214, 213, 213);
