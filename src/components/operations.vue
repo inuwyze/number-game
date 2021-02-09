@@ -1,11 +1,7 @@
 <template>
   <div style="position:absolute;right:0">
-        <div
-        class="ops"
-        @click="$emit('startTimeAttack')" 
-        >
-        <div class="timeAttackIcon"></div>
-        </div>
+        
+        
         <div
         v-for="x in operations"
         class="ops"
@@ -36,14 +32,7 @@ export default {
 </script>
 
 <style>
-    .timeAttackIcon{
-            background: url("../assets/timeattack.jpg");
-            background-size:contain;
-            height: 32px;
-            width: 32px;
-            /* border:1px solid grey; */
-            display: block;   
-        }
+
  .ops{
      border: 1px solid rgb(218, 218, 218);
      height: 45px;

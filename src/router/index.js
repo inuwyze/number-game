@@ -1,14 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import plus from '../views/plus.vue'
+import classic from '../views/classic.vue'
+import timeattack from '../views/timeattack.vue'
+import home from '../views/home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'plus',
-    component: plus
+    name: 'home',
+    component: home
+  },
+  {
+    path: '/classic',
+    name: 'classic',
+    component: classic
+  },
+  {
+    path: '/timeattack',
+    name: 'timeattack',
+    component: timeattack
   },
   {
     path: '/about',

@@ -6,11 +6,11 @@
       <router-link to="/about">About</router-link>
     </div> -->
     <router-view/>
-    <keypad v-if="isMobile" />
+    
   </div>
 </template>
 <script>
-import keypad from './components/keypad'
+// import keypad from './components/keypad'
 
 import {mapActions,mapState} from 'vuex'
 export default{
@@ -18,7 +18,7 @@ export default{
     ...mapState(['isMobile'])
   },
   components: {
-    keypad
+    // keypad
   },
   
   methods: {
@@ -45,6 +45,9 @@ export default{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  
+
+  height:100%;
 }
 body{
     height: 100vh; /* Nice to not have to think about the HTML element parent */
