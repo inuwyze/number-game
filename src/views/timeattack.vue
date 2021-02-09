@@ -17,6 +17,7 @@
     </div >
   <!-- <operations @startTimeAttack='startTimeAttack' v-if="!timeAttackMode"/> -->
     <div :class="chk" class="ans"> {{ans|zero}}</div>
+  <keypad v-if="isMobile && timeAttackMode" />
   </div>
 </template>
 
